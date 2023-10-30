@@ -14,8 +14,8 @@ public class ErrorReportService {
 
     private final ReportRepository reportRepository;
 
-    public List<Report> getList() {
-        return reportRepository.findAll();
+    public List<Report> getList(Long page) {
+        return reportRepository.findList(page);
     }
 
 

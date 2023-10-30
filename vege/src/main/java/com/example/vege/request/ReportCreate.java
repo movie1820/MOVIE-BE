@@ -16,9 +16,9 @@ public class ReportCreate {
     private LocalDateTime createdAt;
 
     @Builder
-    public ReportCreate(String title, String content, LocalDateTime createdAt) {
+    public ReportCreate(String title, String content) {
         this.title = title;
         this.content = content;
-        this.createdAt = createdAt;
+        this.createdAt = LocalDateTime.now();
     }
 }

@@ -18,11 +18,12 @@ public class FileService {
         fileStore.storeFile(multipartFile);
     }
 
-    public void myList(Long userId){//return list해야한다.
-        attachmentRepository.findAllByUserId(userId);
-    }
 
     public void deleteAttachment(Long attachmentId){
         attachmentRepository.deleteById(attachmentId);
+    }
+
+    public void find(String email, Long page) {
+        attachmentRepository.getList(email,page);
     }
 }
