@@ -1,5 +1,6 @@
-package com.example.vege.jwt;
+package com.example.vege.jwt.oauth;
 
+import com.example.vege.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

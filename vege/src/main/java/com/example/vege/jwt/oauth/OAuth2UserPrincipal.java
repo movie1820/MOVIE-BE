@@ -1,4 +1,4 @@
-package com.example.vege.jwt;
+package com.example.vege.jwt.oauth;
 
 import com.example.vege.oauth.OAuth2UserInfo;
 import lombok.RequiredArgsConstructor;

@@ -1,23 +1,24 @@
-package com.example.vege.service;
+package com.example.vege.service.login;
 
 import com.example.vege.entity.User;
-import com.example.vege.jwt.OAuthTokens;
-import com.example.vege.jwt.OAuthTokensGenerator;
+import com.example.vege.jwt.oauth.OAuthTokens;
+import com.example.vege.jwt.oauth.OAuthTokensGenerator;
 import com.example.vege.oauth.OAuthInfoResponse;
 import com.example.vege.oauth.OAuthLoginParams;
 import com.example.vege.oauth.RequestOAuthInfoService;
-import com.example.vege.repository.UserRepository;
+import com.example.vege.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class OAuthService {
+public class OAuthServiceImpl implements OAuthService{
 
     private final UserRepository userRepository;
     private final OAuthTokensGenerator oAuthTokensGenerator;
     private final RequestOAuthInfoService requestOAuthInfoService;
 
+    @Override
     public OAuthTokens login(OAuthLoginParams params) {
         OAuthInfoResponse oAuthInfoResponse = requestOAuthInfoService.request(params);
         Long memberId = findOrCreateMember(oAuthInfoResponse);

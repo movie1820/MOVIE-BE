@@ -38,4 +38,5 @@ public class OAuth2Config {
                 .clientName("Naver")
                 .build();
     }
+
 }

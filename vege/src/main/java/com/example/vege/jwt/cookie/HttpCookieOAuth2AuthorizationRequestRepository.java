@@ -1,5 +1,6 @@
-package com.example.vege.jwt;
+package com.example.vege.jwt.cookie;
 
+import com.example.vege.jwt.cookie.CookieUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

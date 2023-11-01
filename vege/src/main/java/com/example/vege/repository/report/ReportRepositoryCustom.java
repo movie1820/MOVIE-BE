@@ -1,4 +1,4 @@
-package com.example.vege.repository;
+package com.example.vege.repository.report;
 
 import com.example.vege.entity.Report;
 
