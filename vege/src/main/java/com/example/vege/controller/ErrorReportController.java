@@ -1,12 +1,11 @@
 package com.example.vege.controller;
 
-import com.example.vege.jwt.OAuth2UserPrincipal;
 import com.example.vege.request.ReportCreate;
 import com.example.vege.response.ReportResponse;
 import com.example.vege.response.ResponseDto;
 import com.example.vege.service.ErrorReportService;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,11 +15,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+
 @RestController
 @RequiredArgsConstructor
 public class ErrorReportController {
 
     private final ErrorReportService errorReportService;
+
 
     @GetMapping("/report")
     @PreAuthorize("hasAnyRole('ADMIN')")
@@ -38,6 +39,7 @@ public class ErrorReportController {
         errorReportService.write(reportCreate);
         return new ResponseEntity<>(new ResponseDto("신고 했습니다."), HttpStatus.OK);
     }
+
 
     @DeleteMapping("/report/{reportId}")
     @PreAuthorize("hasAnyRole('ADMIN')")

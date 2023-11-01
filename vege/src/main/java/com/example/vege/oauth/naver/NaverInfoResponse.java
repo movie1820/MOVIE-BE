@@ -21,9 +21,6 @@ public class NaverInfoResponse implements OAuthInfoResponse {
         private String name;
     }
 
-    public NaverInfoResponse(Response response) {
-        this.response = response;
-    }
 
     @Override
     public String getEmail() {

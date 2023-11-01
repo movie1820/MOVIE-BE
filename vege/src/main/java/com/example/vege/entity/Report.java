@@ -1,6 +1,9 @@
 package com.example.vege.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,10 +21,6 @@ public class Report {
     private String title;
     private String content;
     private LocalDateTime createdAt;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "attachment_id")
-    private Attachment attachment;
 
     @Builder
     public Report(Long reportId, String title, String content) {
