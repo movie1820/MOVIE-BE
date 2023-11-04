@@ -18,7 +18,6 @@ public class NaverOAuth2UserInfo implements OAuth2UserInfo {
 
     public NaverOAuth2UserInfo(String accessToken, Map<String, Object> attributes) {
         this.accessToken = accessToken;
-        // attributes 맵의 response 키의 값에 실제 attributes 맵이 할당되어 있음
         this.attributes = (Map<String, Object>) attributes.get("response");
         this.id = (String) this.attributes.get("id");
         this.email = (String) this.attributes.get("email");

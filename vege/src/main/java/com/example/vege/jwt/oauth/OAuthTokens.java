@@ -1,4 +1,4 @@
-package com.example.vege.jwt;
+package com.example.vege.jwt.oauth;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

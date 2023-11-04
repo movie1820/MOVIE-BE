@@ -1,8 +1,7 @@
 package com.example.vege.oauth;
 
 import com.example.vege.exception.OAuth2AuthenticationProcessingException;
-import com.example.vege.jwt.OAuth2UserPrincipal;
-import com.example.vege.oauth.naver.NaverInfoResponse;
+import com.example.vege.jwt.oauth.OAuth2UserPrincipal;
 import com.example.vege.oauth.naver.NaverOAuth2UserInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;

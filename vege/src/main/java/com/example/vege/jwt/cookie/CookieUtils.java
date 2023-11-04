@@ -1,4 +1,4 @@
-package com.example.vege.jwt;
+package com.example.vege.jwt.cookie;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

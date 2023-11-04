@@ -1,4 +1,4 @@
-package com.example.vege.repository;
+package com.example.vege.repository.user;
 
 import com.example.vege.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

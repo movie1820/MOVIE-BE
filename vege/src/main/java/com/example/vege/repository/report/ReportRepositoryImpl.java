@@ -1,7 +1,7 @@
-package com.example.vege.repository;
+package com.example.vege.repository.report;
 
-import com.example.vege.entity.QReport;
 import com.example.vege.entity.Report;
+import com.example.vege.repository.report.ReportRepositoryCustom;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import static com.example.vege.entity.QReport.report;
 
 @Repository
 @RequiredArgsConstructor
-public class ReportRepositoryImpl implements ReportRepositoryCustom{
+public class ReportRepositoryImpl implements ReportRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
 

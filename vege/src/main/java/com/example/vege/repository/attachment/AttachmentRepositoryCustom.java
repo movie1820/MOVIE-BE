@@ -1,4 +1,4 @@
-package com.example.vege.repository;
+package com.example.vege.repository.attachment;
 
 import com.example.vege.entity.Attachment;
 

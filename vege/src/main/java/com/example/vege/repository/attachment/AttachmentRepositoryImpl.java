@@ -1,8 +1,6 @@
-package com.example.vege.repository;
+package com.example.vege.repository.attachment;
 
 import com.example.vege.entity.Attachment;
-import com.example.vege.entity.QAttachment;
-import com.example.vege.entity.QUser;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -14,7 +12,7 @@ import static com.example.vege.entity.QUser.user;
 
 @Repository
 @RequiredArgsConstructor
-public class AttachmentRepositoryImpl implements AttachmentRepositoryCustom{
+public class AttachmentRepositoryImpl implements AttachmentRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
 
