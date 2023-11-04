@@ -11,3 +11,4 @@ public class ClientConfig {
         return new RestTemplate();
     }
 }
+
