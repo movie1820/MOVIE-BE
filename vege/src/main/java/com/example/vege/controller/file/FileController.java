@@ -30,18 +30,21 @@ public class FileController {
 
     @GetMapping("/file/{attachmentId}")
     public ResponseEntity<FileResponse> fileFind(@PathVariable Long attachmentId, @AuthenticationPrincipal OAuth2UserPrincipal userPrincipal){
-        return ResponseEntity.ok(fileService.findFile(attachmentId));
+        return ResponseEntity.ok(fileService.findFile(attachmentId, userPrincipal.getName()));
     }
 
     @PostMapping("/file")
-    public ResponseEntity<ResponseDto> saveFile(@RequestBody FileCreate fileCreate, @AuthenticationPrincipal OAuth2UserPrincipal userPrincipal) throws IOException {
-        fileService.saveAttachment((MultipartFile) fileCreate);
+    public ResponseEntity<ResponseDto> saveFile(@RequestPart("file") MultipartFile fileCreate, @AuthenticationPrincipal OAuth2UserPrincipal userPrincipal) throws IOException {
+        fileService.saveAttachment(fileCreate,userPrincipal.getName());
         return new ResponseEntity<>(new ResponseDto("파일을 저장했습니다."), HttpStatus.OK);
     }
 
     @DeleteMapping("/file/{attachmentId}")
     public ResponseEntity<ResponseDto> deleteFile(@PathVariable Long attachmentId, @AuthenticationPrincipal OAuth2UserPrincipal userPrincipal){
-        fileService.deleteAttachment(attachmentId);
-        return new ResponseEntity<>(new ResponseDto("파일을 삭제했습니다."), HttpStatus.OK);
+        if(fileService.deleteAttachment(attachmentId,userPrincipal.getName())){
+            return new ResponseEntity<>(new ResponseDto("파일을 삭제했습니다."), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(new ResponseDto("파일 삭제에 실패했습니다."), HttpStatus.OK);
+        }
     }
 }

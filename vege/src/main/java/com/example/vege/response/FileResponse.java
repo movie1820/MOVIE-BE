@@ -6,13 +6,16 @@ import lombok.Getter;
 @Getter
 public class FileResponse {
 
-    private Long attachmentId;
     private String originFilename;
     private String storeFilename;
 
     public FileResponse(Attachment attachment) {
-        this.attachmentId = attachment.getAttachmentId();
         this.originFilename = attachment.getOriginFilename();
         this.storeFilename = attachment.getStoreFilename();
+    }
+
+    public FileResponse(String originFilename, String storeFilename) {
+        this.originFilename = originFilename;
+        this.storeFilename = storeFilename;
     }
 }

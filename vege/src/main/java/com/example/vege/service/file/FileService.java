@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.List;
 
 public interface FileService {
-    void saveAttachment(MultipartFile multipartFile) throws IOException;
-    void deleteAttachment(Long attachmentId);
+    FileResponse saveAttachment(MultipartFile multipartFile,String email) throws IOException;
+    boolean deleteAttachment(Long attachmentId,String email);
     List<FileResponse> find(String email, Long page);
-    FileResponse findFile(Long attachmentId);
+    FileResponse findFile(Long attachmentId,String email);
 }

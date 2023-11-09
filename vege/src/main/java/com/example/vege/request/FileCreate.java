@@ -10,11 +10,9 @@ import lombok.NoArgsConstructor;
 public class FileCreate {
 
     private String originFilename;
-    private String storeFilename;
 
     @Builder
-    public FileCreate(String originFilename, String storeFilename) {
+    public FileCreate(String originFilename) {
         this.originFilename = originFilename;
-        this.storeFilename = storeFilename;
     }
 }

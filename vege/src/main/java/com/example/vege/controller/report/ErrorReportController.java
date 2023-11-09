@@ -29,6 +29,7 @@ public class ErrorReportController {
     }
 
     @GetMapping("/report/{reportId}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<ReportResponse> reportFind(@PathVariable Long reportId,@AuthenticationPrincipal OAuth2UserPrincipal userPrincipal){
         return ResponseEntity.ok(errorReportService.findReport(reportId));
     }
