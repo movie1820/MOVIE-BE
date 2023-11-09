@@ -1,7 +1,9 @@
 package com.example.vege.service.file;
 
+import com.example.vege.entity.User;
 import com.example.vege.file.FileStore;
 import com.example.vege.repository.attachment.AttachmentRepository;
+import com.example.vege.repository.user.UserRepository;
 import com.example.vege.response.FileResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,16 +17,22 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService{
     private final AttachmentRepository attachmentRepository;
+    private final UserRepository userRepository;
     private final FileStore fileStore;
 
     @Override
-    public void saveAttachment(MultipartFile multipartFile) throws IOException {
-        fileStore.storeFile(multipartFile);
+    public FileResponse saveAttachment(MultipartFile multipartFile,String email) throws IOException {
+        return fileStore.storeFile(multipartFile,email);
     }
 
     @Override
-    public void deleteAttachment(Long attachmentId){
-        attachmentRepository.deleteById(attachmentId);
+    public boolean deleteAttachment(Long attachmentId,String email){
+        User user = attachmentRepository.findById(attachmentId).get().getUser();
+        if(userRepository.findByEmail(email).equals(user)) {
+            attachmentRepository.deleteById(attachmentId);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -34,7 +42,12 @@ public class FileServiceImpl implements FileService{
                 .collect(Collectors.toList());
     }
     @Override
-    public FileResponse findFile(Long attachmentId) {
-        return attachmentRepository.findById(attachmentId).map(FileResponse::new).orElseThrow(()->new IllegalArgumentException());
+    public FileResponse findFile(Long attachmentId,String email) {
+        User user = attachmentRepository.findById(attachmentId).get().getUser();
+        if(userRepository.findByEmail(email).equals(user)) {
+            attachmentRepository.deleteById(attachmentId);
+            return attachmentRepository.findById(attachmentId).map(FileResponse::new).orElseThrow(()->new IllegalArgumentException());
+        }
+        return null;
     }
 }

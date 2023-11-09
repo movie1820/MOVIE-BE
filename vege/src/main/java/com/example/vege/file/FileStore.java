@@ -1,21 +1,32 @@
 package com.example.vege.file;
 
 import com.example.vege.entity.Attachment;
+import com.example.vege.entity.User;
+import com.example.vege.repository.attachment.AttachmentRepository;
+import com.example.vege.repository.user.UserRepository;
+import com.example.vege.response.FileResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+//import com.example.vege.response.FileResponse;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @Component
 public class FileStore {
 
     @Value("${file.dir}")
     private String fileDirPath;
+
+    private final AttachmentRepository attachmentRepository;
+    private final UserRepository userRepository;
 
     public String getFullPath(String filename){
         return fileDirPath+filename;
@@ -34,34 +45,27 @@ public class FileStore {
         return storeFilename;
     }
 
-    public Attachment storeFile(MultipartFile multipartFile) throws IOException {
+    public FileResponse storeFile(MultipartFile multipartFile,String email) throws IOException {
         if (multipartFile.isEmpty()) {
             return null;
         }
+
+        User user = userRepository.findByEmail(email).orElseThrow();
+
         String originalFilename = multipartFile.getOriginalFilename();
         String storeFilename = createStoreFilename(originalFilename);
+
         multipartFile.transferTo(new File(getFullPath(storeFilename)));
 
-        return Attachment.builder()
-                .originFilename(originalFilename)
+        Attachment att = Attachment.builder()
                 .storeFilename(storeFilename)
+                .originFilename(originalFilename)
+                .user(user)
                 .build();
-    }
 
-    public String storeName(MultipartFile multipartFile){
-        String originalFilename = multipartFile.getOriginalFilename();
-        String storeFilename = createStoreFilename(originalFilename);
-        return getFullPath(storeFilename);
-    }
+        attachmentRepository.save(att);
 
-    public List<Attachment> storeFiles(List<MultipartFile> multipartFiles) throws IOException {
-        List<Attachment> attachments=new ArrayList<>();
-        for(MultipartFile multipartFile:multipartFiles){
-            if(!multipartFile.isEmpty()){
-                attachments.add(storeFile(multipartFile));
-            }
-        }
-        return attachments;
+        return new FileResponse(originalFilename,storeFilename);
     }
 
 }
